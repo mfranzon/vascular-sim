@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artery Plaque Simulator with Dynamic Stent Control</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        canvas { display: block; }
+        #uiContainer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            max-width: 300px;
+        }
+        #metrics { margin-top: 10px; font-size: 14px; }
+        #explanation { margin-top: 10px; font-size: 12px; color: #555; }
+        #presets { margin-top: 10px; }
+        button { margin: 5px; padding: 5px 10px; cursor: pointer; }
+        #helpBtn { position: absolute; top: 10px; right: 10px; }
+        #helpPopup {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 200px;
+            font-size: 12px;
+        }
+        #tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="uiContainer">
+        <label for="plaqueSlider">Plaque Level: <span id="percentage">0%</span></label><br>
+        <input type="range" id="plaqueSlider" min="0" max="100" value="0" step="1">
+        <div id="metrics">
+            <strong>Flow Rate:</strong> <span id="flowRate">0.00</span> mL/s<br>
+            <strong>Resistance:</strong> <span id="resistanceValue">0.00</span> mmHg·s/mL
+        </div>
+        <div id="explanation"></div>
+        <div id="presets">
+            <button id="healthyBtn">Healthy</button>
+            <button id="mildBtn">Mild</button>
+            <button id="severeBtn">Severe</button>
+            <button id="resetBtn">Reset</button>
+            <button id="stentBtn">Place Stent</button>
+            <button id="confirmStentBtn" style="display:none;">Confirm Stent</button>
+            <button id="removeStentBtn" style="display:none;">Remove Stent</button>
+            <button id="rotateStentBtn" style="display:none;">Rotate Stent (Y)</button>
+            <button id="translateStentBtn" style="display:none;">Move Stent</button>
+        </div>
+    </div>
+    <button id="helpBtn">Help</button>
+    <div id="helpPopup">
+        Move the slider to increase plaque. Hover over parts to learn more. Click "Place Stent" to position it, orbit scene when not dragging, use "Move" or "Rotate" to adjust (scene locks during drag), then "Confirm Stent" to apply it!
+    </div>
+    <div id="tooltip"></div>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
